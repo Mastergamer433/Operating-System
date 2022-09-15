@@ -1,2 +1,0 @@
-stdio.c(41): Error! E1057: Modifiers disagree with previous definition of 'printf'
-stdio.c(41): Note! I2002: 'printf' defined in: stdio.h(5)

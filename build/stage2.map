@@ -1,7 +1,7 @@
 Open Watcom Linker Version 2.0 beta Aug 15 2022 07:27:06 (32-bit)
 Copyright (c) 2002-2022 The Open Watcom Contributors. All Rights Reserved.
 Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
-Created on:       22/08/15 20:03:01
+Created on:       22/09/14 15:12:45
 Executable Image: /home/mg433/Projects/OS/build/stage2.bin
 creating a RAW Binary Image executable
 
@@ -13,7 +13,7 @@ creating a RAW Binary Image executable
 Group                           Address              Size
 =====                           =======              ====
 
-DGROUP                          0000009e             00000016
+DGROUP                          00000908             0000009e
 
 
 
@@ -25,10 +25,10 @@ Segment                Class          Group          Address         Size
 =======                =====          =====          =======         ====
 
 _ENTRY                 CODE           AUTO           00000000        00000013
-_TEXT                  CODE           AUTO           00000013        0000008b
-CONST                  DATA           DGROUP         0000009e        00000016
-CONST2                 DATA           DGROUP         000000b4        00000000
-_DATA                  DATA           DGROUP         000000b4        00000000
+_TEXT                  CODE           AUTO           00000013        000008f4
+CONST                  DATA           DGROUP         00000908        0000008c
+CONST2                 DATA           DGROUP         00000994        00000011
+_DATA                  DATA           DGROUP         000009a6        00000000
 
 
                         +----------------+
@@ -44,12 +44,26 @@ Address        Symbol
 Module: /home/mg433/Projects/OS/build/stage2/asm/main.obj(main.asm)
 00000000       entry
 Module: /home/mg433/Projects/OS/build/stage2/asm/x86.obj(x86.asm)
-00000013       _x86_Video_WriteCharTeletype
+00000013       __U4D
+0000003a*      __U4M
+00000054       _x86_div64_32
+00000082       _x86_Video_WriteCharTeletype
+00000095       _x86_Disk_Reset
+000000aa       _x86_Disk_Read
+000000e1       _x86_Disk_GetDriveParams
+Module: /home/mg433/Projects/OS/build/stage2/c/disk.obj(/home/mg433/Projects/OS/src/bootloader/stage2/disk.c)
+00000125+      DISK_Initialize_
+0000019b+      DISK_LBA2CHS_
+0000024e+      DISK_ReadSectors_
 Module: /home/mg433/Projects/OS/build/stage2/c/main.obj(/home/mg433/Projects/OS/src/bootloader/stage2/main.c)
-00000026       _cstart_
+000002eb       _cstart_
 Module: /home/mg433/Projects/OS/build/stage2/c/stdio.obj(/home/mg433/Projects/OS/src/bootloader/stage2/stdio.c)
-00000040+      putc_
-00000067       puts_
+00000375+      putc_
+0000039c       puts_
+000003d3+      puts_f_
+00000410       _printf
+00000693+      printf_number_
+00000994+      _g_HexChars
 
 
                         +---------------------+
@@ -63,17 +77,22 @@ Module          Segment               Class           Address         Size
 ======          =======               =====           =======         ====
 
 main.asm        _ENTRY                CODE           00000000         00000013
-x86.asm         _TEXT                 CODE           00000013         00000013
+x86.asm         _TEXT                 CODE           00000013         00000112
+/home/mg433/Projects/OS/src/bootloader/stage2/disk.c
+                _TEXT                 CODE           00000125         000001c6
+                CONST                 DATA           00000908         00000000
+                CONST2                DATA           00000994         00000000
+                _DATA                 DATA           000009a6         00000000
 /home/mg433/Projects/OS/src/bootloader/stage2/main.c
-                _TEXT                 CODE           00000026         0000001a
-                CONST                 DATA           0000009e         00000016
-                CONST2                DATA           000000b4         00000000
-                _DATA                 DATA           000000b4         00000000
+                _TEXT                 CODE           000002eb         0000008a
+                CONST                 DATA           00000908         0000008c
+                CONST2                DATA           00000994         00000000
+                _DATA                 DATA           000009a6         00000000
 /home/mg433/Projects/OS/src/bootloader/stage2/stdio.c
-                _TEXT                 CODE           00000040         0000005e
-                CONST                 DATA           000000b4         00000000
-                CONST2                DATA           000000b4         00000000
-                _DATA                 DATA           000000b4         00000000
+                _TEXT                 CODE           00000375         00000592
+                CONST                 DATA           00000994         00000000
+                CONST2                DATA           00000994         00000011
+                _DATA                 DATA           000009a6         00000000
 Warning! W1014: stack segment not found
 
 
@@ -82,6 +101,6 @@ Warning! W1014: stack segment not found
                         +-----------------------+
 
 Stack size:  0200 (512.)
-Memory size:  00b4 (180.)
+Memory size:  09a6 (2470.)
 Entry point address: 00000000
 Link time: 00:00.00
